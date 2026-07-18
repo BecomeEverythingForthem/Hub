@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NihonGO! Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #58CC02;
+    --green-dark: #46A302;
+    --green-light: #D7FFB8;
+    --blue: #1CB0F6;
+    --blue-dark: #0A91D1;
+    --blue-light: #D0F0FF;
+    --red: #FF4B4B;
+    --red-dark: #CC3D3D;
+    --yellow: #FFD900;
+    --yellow-dark: #E6C400;
+    --orange: #FF9600;
+    --orange-dark: #CC7800;
+    --purple: #CE82FF;
+    --purple-dark: #A654D4;
+    --gray-100: #F7F7F7;
+    --gray-200: #ECECEC;
+    --gray-300: #AFAFAF;
+    --gray-700: #3C3C3C;
+    --white: #FFFFFF;
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', 'Noto Sans JP', sans-serif;
+    background: var(--gray-100);
+    min-height: 100vh;
+    color: var(--gray-700);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* HEADER */
+  .header {
+    width: 100%;
+    background: var(--white);
+    padding: 20px 24px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .header-logo {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--green-dark);
+    letter-spacing: -0.5px;
+  }
+
+  .header-logo span {
+    color: var(--blue);
+  }
+
+  .header-sub {
+    font-size: 13px;
+    color: var(--gray-300);
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  /* MAIN */
+  .main {
+    width: 100%;
+    max-width: 480px;
+    padding: 28px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .section-label {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--gray-300);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 8px;
+    margin-bottom: 4px;
+    padding-left: 4px;
+  }
+
+  /* APP CARDS */
+  .app-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 0px var(--card-shadow, #D0D0D0);
+    border: 2px solid var(--card-border, #E0E0E0);
+    transition: transform 0.1s, box-shadow 0.1s;
+    cursor: pointer;
+  }
+
+  .app-card:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0px var(--card-shadow, #D0D0D0);
+  }
+
+  .app-card.kotoba {
+    --card-shadow: #36A801;
+    --card-border: var(--green);
+  }
+  .app-card.kanji {
+    --card-shadow: #D44400;
+    --card-border: var(--orange);
+  }
+  .app-card.bunpou {
+    --card-shadow: #0A72C4;
+    --card-border: var(--blue);
+  }
+
+  .app-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  .kotoba .app-icon { background: var(--green-light); }
+  .kanji .app-icon { background: #FFE8D0; }
+  .bunpou .app-icon { background: var(--blue-light); }
+
+  .app-info { flex: 1; }
+
+  .app-name {
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1.1;
+  }
+
+  .kotoba .app-name { color: var(--green-dark); }
+  .kanji .app-name { color: var(--orange-dark); }
+  .bunpou .app-name { color: var(--blue-dark); }
+
+  .app-desc {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-300);
+    margin-top: 3px;
+  }
+
+  .app-arrow {
+    font-size: 20px;
+    color: var(--gray-300);
+  }
+
+  /* SAVE DATA SECTION */
+  .save-section {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: 0 4px 0px #D0D0D0;
+    border: 2px solid var(--gray-200);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .save-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--gray-700);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .save-title span { font-size: 18px; }
+
+  .save-subtitle {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray-300);
+    margin-top: -4px;
+  }
+
+  .save-apps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .save-app-row {
+    background: var(--gray-100);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .save-app-label {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .save-btn-group {
+    display: flex;
+    gap: 6px;
+  }
+
+  .btn-save {
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 7px 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+
+  .btn-save:active {
+    transform: translateY(2px);
+    box-shadow: none !important;
+  }
+
+  .btn-export {
+    background: var(--purple);
+    color: white;
+    box-shadow: 0 3px 0 var(--purple-dark);
+  }
+
+  .btn-import {
+    background: var(--yellow);
+    color: var(--gray-700);
+    box-shadow: 0 3px 0 var(--yellow-dark);
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--gray-700);
+    color: white;
+    padding: 12px 22px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: transform 0.3s ease;
+    z-index: 999;
+    white-space: nowrap;
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* Hidden input */
+  #file-input { display: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-logo">NihonGO! <span>Hub</span></div>
+  <div class="header-sub">日本語 Study Center</div>
+</div>
+
+<div class="main">
+
+  <div class="section-label">Pilih Aplikasi</div>
+
+  <a class="app-card kotoba" href="https://becomeeverythingforthem.github.io/CODE-10/" target="_blank">
+    <div class="app-icon">📚</div>
+    <div class="app-info">
+      <div class="app-name">Kotoba</div>
+      <div class="app-desc">Belajar kosakata Jepang</div>
+    </div>
+    <div class="app-arrow">›</div>
+  </a>
+
+  <a class="app-card kanji" href="https://becomeeverythingforthem.github.io/kanji-game/" target="_blank">
+    <div class="app-icon">漢</div>
+    <div class="app-info">
+      <div class="app-name">Kanji</div>
+      <div class="app-desc">Latihan membaca kanji</div>
+    </div>
+    <div class="app-arrow">›</div>
+  </a>
+
+  <a class="app-card bunpou" href="https://becomeeverythingforthem.github.io/NihonGO-study/" target="_blank">
+    <div class="app-icon">文</div>
+    <div class="app-info">
+      <div class="app-name">Bunpou</div>
+      <div class="app-desc">Latihan tata bahasa Jepang</div>
+    </div>
+    <div class="app-arrow">›</div>
+  </a>
+
+  <div class="section-label" style="margin-top:12px;">Data Tersimpan</div>
+
+  <div class="save-section">
+    <div class="save-title"><span>💾</span> Kelola Save Data</div>
+    <div class="save-subtitle">Export untuk backup, Import untuk memulihkan data</div>
+
+    <div class="save-apps">
+
+      <!-- KOTOBA -->
+      <div class="save-app-row">
+        <div class="save-app-label" style="color: var(--green-dark);">📚 Kotoba</div>
+        <div class="save-btn-group">
+          <button class="btn-save btn-export" onclick="exportData('kotoba')">Export</button>
+          <button class="btn-save btn-import" onclick="triggerImport('kotoba')">Import</button>
+        </div>
+      </div>
+
+      <!-- KANJI -->
+      <div class="save-app-row">
+        <div class="save-app-label" style="color: var(--orange-dark);">漢 Kanji</div>
+        <div class="save-btn-group">
+          <button class="btn-save btn-export" onclick="exportData('kanji')">Export</button>
+          <button class="btn-save btn-import" onclick="triggerImport('kanji')">Import</button>
+        </div>
+      </div>
+
+      <!-- BUNPOU -->
+      <div class="save-app-row">
+        <div class="save-app-label" style="color: var(--blue-dark);">文 Bunpou</div>
+        <div class="save-btn-group">
+          <button class="btn-save btn-export" onclick="exportData('bunpou')">Export</button>
+          <button class="btn-save btn-import" onclick="triggerImport('bunpou')">Import</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+<input type="file" id="file-input" accept=".json">
+
+<script>
+  // ─── SAVE KEYS per app ─────────────────────────────────────────────────────
+  const SAVE_KEYS = {
+    kotoba: [
+      'profiles', 'globalStats', 'globalProfile', 'playedGroups',
+      'achievements', 'dailyMissions', 'sessionHistory', 'appLang',
+      'sfxVolume', 'uiScale', 'fontScale', 'globalMode', 'resetCount',
+      'choiceCount', 'sessionWordLimit', 'randomOptions', 'bamboozleMode',
+      'secondChance', 'srsEnabled', 'hardFocusMode', 'intenseBenkyouMode',
+      'uiMode', 'sortTileMode', 'shopData', 'hardcoreMode', 'answerDelay',
+      'hardcoreTimer', 'glitchBaseChance'
+    ],
+    kanji: [
+      'kanji_stats', 'kanji_points', 'kanji_db', 'kanji_settings'
+    ],
+    bunpou: [
+      'nihongo_status_v2', 'nihongo_notes_v1', 'nihongo_profiles'
+    ]
+  };
+
+  const APP_NAMES = { kotoba: 'Kotoba', kanji: 'Kanji', bunpou: 'Bunpou' };
+
+  let pendingImportApp = null;
+
+  // ─── EXPORT ────────────────────────────────────────────────────────────────
+  function exportData(app) {
+    const keys = SAVE_KEYS[app];
+    const data = {};
+    let hasData = false;
+
+    keys.forEach(k => {
+      const v = localStorage.getItem(k);
+      if (v !== null) {
+        try { data[k] = JSON.parse(v); }
+        catch { data[k] = v; }
+        hasData = true;
+      }
+    });
+
+    if (!hasData) {
+      showToast(`⚠️ Tidak ada data ${APP_NAMES[app]} yang tersimpan`);
+      return;
+    }
+
+    const blob = new Blob(
+      [JSON.stringify({ __app: app, __version: 1, data }, null, 2)],
+      { type: 'application/json' }
+    );
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `nihongo-${app}-save-${dateStamp()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast(`✅ Data ${APP_NAMES[app]} berhasil diexport!`);
+  }
+
+  // ─── IMPORT ────────────────────────────────────────────────────────────────
+  function triggerImport(app) {
+    pendingImportApp = app;
+    const input = document.getElementById('file-input');
+    input.value = '';
+    input.click();
+  }
+
+  document.getElementById('file-input').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file || !pendingImportApp) return;
+
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      try {
+        const parsed = JSON.parse(ev.target.result);
+        const app = pendingImportApp;
+
+        // Support both formats: {__app, data} and raw key-value object
+        const payload = parsed.data || parsed;
+        const validKeys = SAVE_KEYS[app];
+        let count = 0;
+
+        Object.entries(payload).forEach(([k, v]) => {
+          if (validKeys.includes(k)) {
+            localStorage.setItem(k, JSON.stringify(v));
+            count++;
+          }
+        });
+
+        if (count === 0) {
+          showToast(`⚠️ File tidak cocok untuk ${APP_NAMES[app]}`);
+        } else {
+          showToast(`✅ ${count} data ${APP_NAMES[app]} berhasil diimport!`);
+        }
+      } catch (err) {
+        showToast('❌ File JSON tidak valid');
+      }
+    };
+    reader.readAsText(file);
+  });
+
+  // ─── HELPERS ───────────────────────────────────────────────────────────────
+  function dateStamp() {
+    const d = new Date();
+    return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`;
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+</script>
+
+</body>
+</html>
